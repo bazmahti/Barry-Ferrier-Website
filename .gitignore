@@ -9,3 +9,6 @@ standalone/
 *.pdf
 *.zip
 .cache/
+.session/history/
+.env.local
+Ferrier_PhD_1770066349928.pdf
