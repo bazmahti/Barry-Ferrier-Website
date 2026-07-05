@@ -12,7 +12,12 @@ app.use('/attached_assets', express.static(path.resolve(process.cwd(), 'attached
 const httpServer = createServer(app);
 
 app.use(session({
-  secret: process.env.SESSION_SECRET || "doctorbaz-secret-key-2024",
+  secret: (() => {
+    if (!process.env.SESSION_SECRET) {
+      throw new Error('SESSION_SECRET environment variable is not set. Set it before starting the server.');
+    }
+    return process.env.SESSION_SECRET;
+  })(),
   resave: false,
   saveUninitialized: false,
   cookie: { 
